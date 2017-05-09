@@ -23,7 +23,7 @@
     "test/**"
   ],
   "dependencies": {
-    "d3": "^3.5.17",
+    "d3": "^4.8.0",
     "ciena-dagre": "^1.0.4",
     "ciena-graphlib": "^1.0.6",
     "lodash": "^3.10.0"

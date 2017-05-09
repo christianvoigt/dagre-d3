@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <title>Graph Storyboard. Add and Prune Dependencies Algorithm</title>
 
-<script src="http://d3js.org/d3.v3.js"></script>
+<script src="http://d3js.org/d3.v4.js"></script>
 <script src="../build/dist/dagre-d3.js"></script>
 
 <style id="css">
@@ -116,11 +116,10 @@ var dagred3Story = function(svgelement, graphType, interframetime) {
 	}
 	this.svg = d3.select(svgelement);
   this.inner = this.svg.append("g");
-	this.svg.call(d3.behavior.zoom().on("zoom", (function() {
-		this.inner.attr("transform", "translate(" + d3.event.translate + ")" +
-		                                 "scale(" + d3.event.scale + ")")
+	this.svg.call(d3.zoom().on("zoom", (function() {
+    this.inner.attr("transform", d3.event.transform);
   }).bind(this)));
-	
+
 	this.t = 0;
 
 	this.dagreD3render = new dagreD3.render();
@@ -144,12 +143,12 @@ dagred3Story.prototype.animateFrame = function(RenderAfter, Frame) {
 					break;
 				case 'AddCoherenceEdge':
 					this.g.setEdge(x[1], x[2], {
-						lineInterpolate: 'basis' 
+						lineInterpolate: d3.curveBasis
 					});
 					break;
 				case 'AddDependencyEdge':
 					this.g.setEdge(x[1], x[2], {
-						lineInterpolate: 'basis'
+						lineInterpolate: d3.curveBasis
 						,label: 'added'
 						,labeloffset: 5
 						,labelpos: 'l'
@@ -157,8 +156,8 @@ dagred3Story.prototype.animateFrame = function(RenderAfter, Frame) {
 					break;
 				case 'MakeRedundantEdge':
 					this.g.setEdge(x[1], x[2], {
-						style: "stroke: #aaa;   stroke-dasharray: 5, 10;" 
-						,lineInterpolate: 'basis'
+						style: "stroke: #aaa;   stroke-dasharray: 5, 10;"
+						,lineInterpolate: d3.curveBasis
 						,arrowheadStyle: "fill: #aaa"
 						,labelpos: 'c'
 						,label: 'pruned'
@@ -186,7 +185,7 @@ dagred3Story.prototype.animateFrame = function(RenderAfter, Frame) {
 				}
 			}
 		}.bind(this))
-		
+
 		if (this.g) {
 			// Render
 			this.dagreD3render(this.inner,this.g);
@@ -228,13 +227,13 @@ var dependenciesstory = new dagred3Story("#dependencies", "Schedule Network", fr
 dependenciesstory.animateStory(0,
 [
 	[
-		
-	],[ 
-		
+
 	],[
-		
-	],[ 
-		
+
+	],[
+
+	],[
+
 	]
 	,[
 		["setActivity", "A.1"]
@@ -243,13 +242,13 @@ dependenciesstory.animateStory(0,
 		,
 		["AddDependencyEdge", "A.1", "A.2 Start"]
 	],[
-		
+
 	],[
-		
+
 	],[
-		
+
 	],[
-		
+
 	],[
 		["setActivity", "A.2.2"]
 		,
@@ -257,13 +256,13 @@ dependenciesstory.animateStory(0,
 		,
 		["AddDependencyEdge", "A.2.2", "A.2.3"]
 	],[
-		
+
 	],[
-		
+
 	],[
-		
+
 	],[
-		
+
 	],[
 		["setActivity", "A.2.1"]
 		,
@@ -271,9 +270,9 @@ dependenciesstory.animateStory(0,
 		,
 		["AddDependencyEdge", "A.2.1", "B"]
 	],[
-		
+
 	],[
-		
+
 	]
 ]);
 
@@ -293,23 +292,23 @@ WBSstory.animateStory(0,
 		["AddWBSEdge", "Project", "B"]
 	],[
 		["setComponent", "A.1"]
-		, 
+		,
 		["AddWBSEdge", "A", "A.1"]
 		,
 		["setComponent", "A.2"]
-		, 
+		,
 		["AddWBSEdge",  "A", "A.2"]
 	],[
 		["setComponent", "A.2.1"]
-		, 
+		,
 		["AddWBSEdge", "A.2", "A.2.1"]
 		,
 		["setComponent", "A.2.2"]
-		, 
+		,
 		["AddWBSEdge",  "A.2", "A.2.2"]
 		,
 		["setComponent", "A.2.3"]
-		, 
+		,
 		["AddWBSEdge",  "A.2", "A.2.3"]
 	]
 ]);
@@ -322,11 +321,11 @@ schedulestory.animateStory(0,
 [
 	[
 		["setActivity", "Project"]
-	],[ 
+	],[
 		["removeNode", "Project"]
 		,
 		["setMilestone", "Project Finish"]
-		, 
+		,
 		["setMilestone", "Project Start"]
 		,
 		["setActivity", "A"]
@@ -344,11 +343,11 @@ schedulestory.animateStory(0,
 		["removeNode", "A"]
 		,
 		["setMilestone", "A Start"]
-		, 
+		,
 		["setActivity", "A.1"]
-		,  
+		,
 		["setActivity", "A.2"]
-		,  
+		,
 		["setMilestone", "A Finish"]
 		,
 		["AddCoherenceEdge", "A Start", "A.1"]
@@ -362,17 +361,17 @@ schedulestory.animateStory(0,
 		["AddCoherenceEdge", "Project Start", "A Start"]
 		,
 		["AddCoherenceEdge", "A Finish", "Project Finish"]
-	],[ 
+	],[
 		["removeNode", "A.2"]
 		,
 		["setMilestone", "A.2 Start"]
-		, 
+		,
 		["setActivity", "A.2.1"]
-		,  
+		,
 		["setActivity", "A.2.2"]
-		,  
+		,
 		["setActivity", "A.2.3"]
-		,  
+		,
 		["setMilestone", "A.2 Finish"]
 		,
 		["AddCoherenceEdge", "A.2 Start", "A.2.1"]
