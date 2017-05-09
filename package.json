@@ -1,6 +1,6 @@
 {
   "name": "dagre-d3",
-  "version": "0.4.18-pre",
+  "version": "0.4.18",
   "description": "A D3-based renderer for Dagre",
   "author": "Chris Pettitt <chris@samsarin.com>",
   "keywords": [
@@ -10,9 +10,9 @@
     "renderer"
   ],
   "dependencies": {
-    "d3": "^3.3.8",
-    "dagre": "^0.7.3",
-    "graphlib": "^1.0.5",
+    "d3": "^3.5.17",
+    "ciena-dagre": "^1.0.4",
+    "ciena-graphlib": "^1.0.6",
     "lodash": "^3.10.0"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cpettitt/dagre-d3.git"
+    "url": "https://github.com/asalihi/dagre-d3.git"
   },
   "license": "MIT"
 }
