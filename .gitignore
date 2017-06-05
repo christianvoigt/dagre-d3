@@ -1,6 +1,7 @@
-/bower_components
-/build
-/node_modules
+lib
+dist
+node_modules
 .idea
 *.iml
 *.ipr
+.DS_Store

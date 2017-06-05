@@ -1,7 +1,9 @@
 /browser.js
 /build
 /demo
-/Makefile
 /node_modules
+/coverage
 /src
 /test
+.DS_Store
+npm-debug.log

@@ -1,6 +1,6 @@
 var bodyElem = d3.select('body'),
     jsElem = d3.select('#js'),
-    jsPanel = bodyElem.append('div').attr('id', 'jsPanel');
+    jsPanel = bodyElem.append('div').attr('id', 'jsPanel'),
     cssElem = d3.select('#css'),
     cssPanel = bodyElem.append('div').attr('id', 'cssPanel');
 
