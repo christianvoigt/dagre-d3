@@ -11,6 +11,13 @@ The build process now uses webpack, babel and simple npm-scripts instead of gulp
 For more details, including examples and configuration options, please see our
 [wiki](https://github.com/cpettitt/dagre-d3/wiki).
 
+You can install this npm package directly from github: 
+
+```
+npm install https://github.com/christianvoigt/dagre-d3
+```
+Please update your npm version to 5.0.0 or newer, otherwise the package installation will fail.
+
 ## License
 
 dagre-d3 is licensed under the terms of the MIT License. See the LICENSE file
