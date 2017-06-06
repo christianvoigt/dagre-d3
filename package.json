@@ -20,6 +20,7 @@
     "lodash": "^4.17.4"
   },
   "scripts": {
+    "prepublish": "npm run build",
     "build": "npm run clean && npm run build-version && npm run build-lib && npm run build-dist",
     "build-dist": "webpack && uglifyjs ./dist/dagre-d3.js -c -m -o ./dist/dagre-d3.min.js --source-map ./dist/dagre-d3.min.js.map",
     "build-lib": "npm run copy-demos && babel src -d lib --presets es2015 --plugins add-module-exports",
