@@ -14,16 +14,17 @@
   ],
   "main": "./lib/index.js",
   "dependencies": {
-    "d3": "^3.5.17",
+    "babel-loader": "^8.0.0-beta.2",
     "ciena-dagre": "^1.0.7",
     "ciena-graphlib": "^1.0.8",
+    "d3": "^3.5.17",
     "lodash": "^4.17.4"
   },
   "scripts": {
     "prepare": "npm run build",
     "build": "npm run clean && npm run build-version && npm run build-lib && npm run build-dist",
     "build-dist": "webpack && uglifyjs ./dist/dagre-d3.js -c -m -o ./dist/dagre-d3.min.js --source-map ./dist/dagre-d3.min.js.map",
-    "build-lib": "npm run copy-demos && babel src -d lib --presets es2015 --plugins add-module-exports",
+    "build-lib": "npm run copy-demos && babel src -d lib",
     "build-version": "node ./src/generateVersionJs.js",
     "watch:js": "watch 'npm run build' ./src/",
     "copy-demos": "cpx \"demo/**/*{.html,.css,.js}\" dist/demo --verbose && replace-in-file ../dist/dagre-d3.js ../dagre-d3.js dist/demo/**/*",
@@ -39,10 +40,10 @@
     "dev": "parallelshell 'npm run browsersync' 'npm run watch -s'"
   },
   "devDependencies": {
-    "babel-cli": "^7.0.0-alpha.12",
-    "babel-loader": "^7.0.0",
+    "@babel/cli": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.24.1",
     "browser-sync": "^2.7.1",
     "chai": "^1.10.0",
     "cpx": "^1.5.0",
@@ -63,8 +64,10 @@
     "parallelshell": "^2.0.0",
     "phantomjs": "^2.1.3",
     "replace-in-file": "^2.5.0",
+    "uglifyjs-webpack-plugin": "^1.2.4",
     "watch": "^1.0.2",
-    "webpack": "^2.6.1"
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
   },
   "repository": {
     "type": "git",
